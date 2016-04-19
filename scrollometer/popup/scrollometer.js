@@ -44,13 +44,6 @@ function pxToM(distance){
 var bigdiv = document.getElementById("bigdiv")
 bigdiv.innerHTML = "This page offers <code>" + fullHeight + " px</code> of potential or " + pxToCm(fullHeight)*devicePixelRatio  + " cm <br><br> Your device pixel ratio is " + devicePixelRatio + "<br><br>You have a set PPI of " + pixels_per_inch + " <br><br> and You've scrolled " + cumulativeDist + " px or " + pxToM(cumulativeDist) + " meters! <br> on <code>" + window.location.host + "</code>";
 
-//var smalldiv = document.createElement("div")
-//document.body.appendChild(smalldiv)
-//smalldiv.className = "small-bubble"
-//smalldiv.id = "small-bubble"
-//smalldiv.setAttribute("style", "opacity: 1; z-index: 9999; font-family: monospace; position: //fixed; top: 10px !important; width: 200px; right: 10px !important; background-color: lightblue; //padding: 10px; border-radius: 5px;")
-//smalldiv.innerHTML = "Distance: " + pxToM(cumulativeDist) + " m";
-
 var scrollListener = window.addEventListener("scroll", function(){
   //console.log("prevCumulativeDist at start of event listener " + prevCumulativeDist);
   var currentPos = window.scrollY;
@@ -64,15 +57,3 @@ var scrollListener = window.addEventListener("scroll", function(){
   localStorage.prevCumulativeDist = [parseInt(prevCumulativeDist, 10) , datetime ];
   //console.log("prevCumulativeDist at END of event listener " + prevCumulativeDist);
 });
-
-var smallerdiv = document.getElementById("small-bubble");
-var biggerdiv = document.getElementById("big-bubble");
-
-smallerdiv.addEventListener("mouseover", function(){
-  smalldiv.style.opacity = "0"
-  bigdiv.style.opacity = "1"
-})
-biggerdiv.addEventListener("mouseleave", function(){
-  smalldiv.style.opacity = "1"
-  bigdiv.style.opacity = "0"
-})

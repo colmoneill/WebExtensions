@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="scrollometer.css"/>
+  </head>
+
+  <body>
+    <div id="bigdiv">
+      <p>This page offers <code>" + fullHeight + " px</code> of potential or " + pxToCm(fullHeight)*devicePixelRatio  + " cm <br><br> Your device pixel ratio is " + devicePixelRatio + "<br><br>You have a set PPI of " + pixels_per_inch + " <br><br> and You've scrolled " + cumulativeDist + " px or " + pxToM(cumulativeDist) + " meters! <br> on <code>" + window.location.host + </code></p>
+    </div>
+
+    <script src="scrollometer.js"></script>
+  </body>
+
+</html>

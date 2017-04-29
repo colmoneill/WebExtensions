@@ -18,8 +18,14 @@
 
   "permissions": [
     "activeTab",
-    "storage"
+    "storage",
+    "tabs"
   ],
+
+  "background": {
+  "scripts": "background/background-script.js",
+  "page": "background/background-page.html"
+},
 
   "browser_action": {
     "default_icon": "icons/ladder.png",
@@ -32,7 +38,10 @@
     "matches": ["<all_urls>"],
     "js": ["content_scripts/count_metrics.js"]
   }
-]
+],
 
+  "options_ui": {
+    "page": "options/options.html"
+  }
 
 }

@@ -1,3 +1,5 @@
+console.log("content script trigger");
+
 var initVertPos = window.scrollY,
     initHorizPos = window.scrollX,
     fullWidth = window.innerWidth,
@@ -15,8 +17,9 @@ var initVertPos = window.scrollY,
               + currentdate.getMinutes() + ":"
               + currentdate.getSeconds();
 
-if (browser.storage.sync.get('prevCumulativeDist')){
-  var prevCumulativeDist = parseInt(browser.storage.sync.get('prevCumulativeDist'), 10);
+
+if (browser.storage.sync.get('prevCumulativeDist') > 1 ){
+  var prevCumulativeDist = parseInt(browser.storage.local.get('prevCumulativeDist'), 10);
   console.log("previous cumulative distance found, using it");
 }
 else {
@@ -24,9 +27,9 @@ else {
   console.log("no previous cumulative distance found, starting from 0");
 }
 
-if (browser.storage.sync.get('pixels_per_inch')){
+if (browser.storage.local.get('pixels_per_inch')){
   console.log("got calibrated PPI value, using it");
-  var pixels_per_inch = browser.storage.sync.get('pixels_per_inch');
+  var pixels_per_inch = browser.storage.local.get('pixels_per_inch');
 }
 else {
   console.log("No available PPI value, using default");
@@ -41,6 +44,7 @@ function pxToM(distance){
   return (distance * 0.000264);
 }
 
+
 // callback to set() just checks for errors
 function onSet() {
   if (chrome.runtime.lastError) {
@@ -49,17 +53,3 @@ function onSet() {
     console.log("OK");
   }
 }
-
-var scrollo = 0;
-var scrollListener = window.addEventListener("scroll", function(){
-  //console.log("prevCumulativeDist at start of event listener " + prevCumulativeDist);
-  var currentPos = window.scrollY;
-  var delta = (currentPos - previousPos);
-  cumulativeDist = prevCumulativeDist;
-  cumulativeDist = cumulativeDist + Math.abs(delta);
-  previousPos = currentPos;
-  prevCumulativeDist = cumulativeDist;
-  localStorage.prevCumulativeDist = [parseInt(prevCumulativeDist, 10) , datetime ];
-  console.log("prevCumulativeDist at END of event listener " + prevCumulativeDist);
-  browser.storage.sync.set({cumulativeDist}, onSet)
-});

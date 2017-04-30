@@ -1,5 +1,34 @@
 console.log("yo, i'm triggered by the popup");
-cumulativeDist = chrome.storage.local.get("cumulativeDist", gotItem);
+
+let gettingItem = browser.storage.local.get();
+gettingItem.then(onGot, onError);
+
+function onGot(item) {
+  console.log(item);
+}
+
+function onError(error) {
+  console.log(`Error: ${error}`);
+}
+
+var initVertPos = window.scrollY,
+    initHorizPos = window.scrollX,
+    fullWidth = window.innerWidth,
+    fullHeight = window.innerHeight,
+    devicePixelRatio = window.devicePixelRatio,
+    previousPos = 0,
+    cumulativeDist = 0,
+    prevCumulativeDist = 0,
+    default_ppi = 96,
+    currentdate = new Date(),
+    datetime = "Last entry: " + currentdate.getDate() + "/"
+              + (currentdate.getMonth()+1)  + "/"
+              + currentdate.getFullYear() + " @ "
+              + currentdate.getHours() + ":"
+              + currentdate.getMinutes() + ":"
+              + currentdate.getSeconds();
+
+cumulativeDist = browser.storage.local.get("cumulativeDist", gotItem);
 var tabs = {};
 
 function gotItem(item) {
@@ -14,7 +43,30 @@ function gotItem(item) {
   }
 }
 
-var querying = browser.tabs.query({});
-console.log(querying)
+function logTabs(tabs) {
+  for (let tab of tabs) {
+    // tab.url requires the `tabs` permission
+    console.log(tab.url);
+    let address = tab.url;
+  }
+}
 
-console.log(querying.url[0])
+function onError(error) {
+  console.log(`Error: ${error}`);
+}
+
+var querying = browser.tabs.query({currentWindow: true, active: true});
+querying.then(logTabs, onError);
+
+var scrollo = 0;
+var scrollListener = window.addEventListener("scroll", function(){
+  console.log("prevCumulativeDist at start of event listener " + prevCumulativeDist);
+  var currentPos = window.scrollY;
+  var delta = (currentPos - previousPos);
+  cumulativeDist = prevCumulativeDist;
+  cumulativeDist = cumulativeDist + Math.abs(delta);
+  previousPos = currentPos;
+  prevCumulativeDist = cumulativeDist;
+  var scrollStatus = {address:address, datetime:datetime, cumulativeDist:cumulativeDist};
+  browser.storage.local.set(scrollStatus);
+});

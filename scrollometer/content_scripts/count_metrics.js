@@ -15,8 +15,8 @@ var initVertPos = window.scrollY,
               + currentdate.getMinutes() + ":"
               + currentdate.getSeconds();
 
-if (localStorage.prevCumulativeDist){
-  var prevCumulativeDist = parseInt(localStorage.prevCumulativeDist, 10);
+if (browser.storage.sync.get('prevCumulativeDist')){
+  var prevCumulativeDist = parseInt(browser.storage.sync.get('prevCumulativeDist'), 10);
   console.log("previous cumulative distance found, using it");
 }
 else {
@@ -24,9 +24,9 @@ else {
   console.log("no previous cumulative distance found, starting from 0");
 }
 
-if (localStorage.pixels_per_inch){
+if (browser.storage.sync.get('pixels_per_inch')){
   console.log("got calibrated PPI value, using it");
-  var pixels_per_inch = localStorage.pixels_per_inch
+  var pixels_per_inch = browser.storage.sync.get('pixels_per_inch');
 }
 else {
   console.log("No available PPI value, using default");
@@ -61,5 +61,5 @@ var scrollListener = window.addEventListener("scroll", function(){
   prevCumulativeDist = cumulativeDist;
   localStorage.prevCumulativeDist = [parseInt(prevCumulativeDist, 10) , datetime ];
   console.log("prevCumulativeDist at END of event listener " + prevCumulativeDist);
-  chrome.storage.local.set({cumulativeDist}, onSet)
+  browser.storage.sync.set({cumulativeDist}, onSet)
 });

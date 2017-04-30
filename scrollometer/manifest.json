@@ -5,6 +5,9 @@
   "version": "1.0",
 
   "description": "Measures distance scrolled in real world units.",
+
+  "browser_style": "True",
+
   "icons": {
     "48": "icons/ladder.png"
   },
@@ -19,12 +22,11 @@
   "permissions": [
     "activeTab",
     "storage",
-    "tabs"
+    "tabs"  
   ],
 
   "background": {
-  "scripts": "background/background-script.js",
-  "page": "background/background-page.html"
+  "scripts": ["background/background-script.js"]
 },
 
   "browser_action": {

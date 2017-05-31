@@ -1,2 +1,0 @@
-#beastify
-beastify pages

@@ -5,6 +5,7 @@ function updateLabel() {
       counter += 1;
     }
     browser.browserAction.setBadgeText({text: (counter).toString()});
+    browser.browserAction.setBadgeBackgroundColor({color: "green"});
     //console.log("background.js updating label" + counter);
     constCounter = counter;
     //console.log("constCounter " + constCounter)

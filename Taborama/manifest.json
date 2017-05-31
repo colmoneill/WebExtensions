@@ -13,7 +13,7 @@
   "background": {
   "scripts": ["background.js"]
 },
-  "description": "Taborama gages how well you're multitasking. Open more tabs, do more stuff, comeback later",
+  "description": "Taborama gages how well you're multitasking. Open more tabs, do more stuff, comeback never.",
   "homepage_url": "https://git.xpub.nl/colm.WebExtensions/files.html",
   "manifest_version": 2,
   "name": "Taborama",

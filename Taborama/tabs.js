@@ -32,6 +32,21 @@ function listTabs() {
     tabsList.innerHTML = "Total tab count: " + counter;
     tabsList.appendChild(currentTabs);
     beep();
+
+    let tweetIt = document.getElementById('tweet-it');
+    var textToTweet = "I'm on " + counter + " tabs right now. #Taborama #multitasking";
+    if (textToTweet.length > 140) {
+      alert('Tweet should be less than 140 Chars');
+    }
+    else {
+      var twtLink = 'http://twitter.com/home?status=' +encodeURIComponent(textToTweet);
+    }
+    tweetIt.innerHTML = "Tweet your Taborama"
+    tweetIt.href = twtLink;
+    tweetIt.addEventListener("click", function(){
+      console.log("tweeting from Taborama");
+      window.open(twtLink,'_blank');
+    });
   });
 }
 

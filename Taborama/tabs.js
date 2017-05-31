@@ -18,8 +18,7 @@ function listTabs() {
 
     for (let tab of tabs) {
       if (!tab.active && counter <= limit) {
-        let tabLink = document.createElement('a');
-
+        let tabLink = document.createElement('li');
         tabLink.textContent = tab.title || tab.id;
         tabLink.setAttribute('href', tab.id);
         tabLink.classList.add('switch-tabs');

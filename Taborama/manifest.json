@@ -1,0 +1,26 @@
+{
+  "browser_action": {
+    "browser_style": true,
+    "default_title": "Taborama",
+    "default_popup": "tabs.html",
+    "default_icon": {
+    "48": "icons/plusplusplus48.png"
+    }
+  },
+  "icons": {
+  "48": "icons/plusplusplus48.png"
+},
+  "background": {
+  "scripts": ["background.js"]
+},
+  "description": "Taborama gages how well you're multitasking. Open more tabs, do more stuff, comeback later",
+  "homepage_url": "https://git.xpub.nl/colm.WebExtensions/files.html",
+  "manifest_version": 2,
+  "name": "Taborama",
+  "permissions": [
+    "tabs",
+    "alarms",
+    "notifications"
+  ],
+  "version": "1.0"
+}

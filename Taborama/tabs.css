@@ -1,5 +1,11 @@
 html, body {
   width: 350px;
+  height: auto;
+}
+
+h4#tab-counter{
+  margin:10px;
+  font-weight: bold;
 }
 
 a {

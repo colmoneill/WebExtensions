@@ -29,7 +29,7 @@ function listTabs() {
       browser.browserAction.setBadgeText({text: (counter).toString()});
     }
     console.log("tab counter: " + counter)
-    tabsList.innerHTML = "Total tab count: " + counter;
+    tabCounter.innerHTML = "Total tab count: " + counter;
     tabsList.appendChild(currentTabs);
     beep();
 

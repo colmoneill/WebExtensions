@@ -8,48 +8,57 @@ var initVertPos = window.scrollY,
     previousPos = 0,
     cumulativeDist = 0,
     prevCumulativeDist = 0,
+    scrollo = 0,
     default_ppi = 96,
     currentdate = new Date(),
-    datetime = "Last entry: " + currentdate.getDate() + "/"
+    datetime = currentdate.getDate() + "/"
               + (currentdate.getMonth()+1)  + "/"
               + currentdate.getFullYear() + " @ "
               + currentdate.getHours() + ":"
               + currentdate.getMinutes() + ":"
               + currentdate.getSeconds();
+    var address = window.location.href,
+    address=/^(http(s)?:\/\/)?(.+)$/i.exec(address),
+    address=address[3];
+    //console.log(address);
+    address= "'" + address + "'";
+    //console.log(address);
 
+var scrollListener = window.addEventListener("scroll", function(){
+  console.log("prevCumulativeDist at start of event listener " + prevCumulativeDist);
+  var currentPos = window.scrollY;
+  var delta = (currentPos - previousPos);
+  cumulativeDist = prevCumulativeDist;
+  cumulativeDist = cumulativeDist + Math.abs(delta);
+  previousPos = currentPos;
+  prevCumulativeDist = cumulativeDist;
+  // console.log(cumulativeDist);
+  console.log(address);
+  var saveValues = {
+    'cumulativeDist': cumulativeDist,
+    'entrytime' : datetime
+  };
+  stringToSave = {};
+  stringToSave[address] = saveValues;
+  console.log(stringToSave);
+  chrome.storage.sync.set(stringToSave, function () {
+     console.log('Saved', address, saveValues);
+  });
+  //setStorage(stringToSave);
+});
 
-if (browser.storage.sync.get('prevCumulativeDist') > 1 ){
-  var prevCumulativeDist = parseInt(browser.storage.local.get('prevCumulativeDist'), 10);
-  console.log("previous cumulative distance found, using it");
+var intervalID = window.setInterval(function(){setStorage(stringToSave)}, 10000);
+
+function setStorage(item) {
+  chrome.storage.sync.set(item, function () {
+    console.log('Saved', item);
+  });
 }
-else {
-  var prevCumulativeDist = 0;
-  console.log("no previous cumulative distance found, starting from 0");
+
+function onSet(item) {
+  console.log("set " + item + " to storage");
 }
 
-if (browser.storage.local.get('pixels_per_inch')){
-  console.log("got calibrated PPI value, using it");
-  var pixels_per_inch = browser.storage.local.get('pixels_per_inch');
-}
-else {
-  console.log("No available PPI value, using default");
-  var pixels_per_inch = default_ppi
-}
-
-function pxToCm(distance){
-  return (distance * 0.0264);
-}
-
-function pxToM(distance){
-  return (distance * 0.000264);
-}
-
-
-// callback to set() just checks for errors
-function onSet() {
-  if (chrome.runtime.lastError) {
-    console.log(chrome.runtime.lastError);
-  } else {
-    console.log("OK");
-  }
+function onError(error) {
+  console.log(`Error: ${error}`);
 }

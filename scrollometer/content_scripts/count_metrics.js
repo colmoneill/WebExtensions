@@ -47,7 +47,7 @@ var scrollListener = window.addEventListener("scroll", function(){
   //setStorage(stringToSave);
 });
 
-var intervalID = window.setInterval(function(){setStorage(stringToSave)}, 10000);
+//var intervalID = window.setInterval(function(){setStorage(stringToSave)}, 10000);
 
 function setStorage(item) {
   chrome.storage.sync.set(item, function () {

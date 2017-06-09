@@ -20,7 +20,7 @@ function onGot(item) {
 
     for (items in pageTitle){
       console.log("scrolled " + cumulativeDist + " on " + pageTitle + " last recorded at " + "entrytime");
-      listItem.textContent = "scrolled " + cumulativeDist + " on " + pageTitle + " last recorded on "  + entrytime;
+      listItem.textContent = "scrolled " + pxToCm(cumulativeDist) + " cm on " + pageTitle;
       listEl.appendChild(listItem);
     }
   });
@@ -28,4 +28,13 @@ function onGot(item) {
 
 function onError(error) {
   console.log(`Error: ${error}`);
+}
+
+
+function pxToCm(distance){
+  return (distance * 0.0264);
+}
+
+function pxToM(distance){
+  return (distance * 0.000264);
 }

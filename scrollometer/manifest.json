@@ -14,7 +14,7 @@
   "applications": {
     "gecko": {
       "id": "mail@colm.be",
-      "strict_min_version": "45.0.0"
+      "strict_min_version": "45.0a1"
     }
   },
 

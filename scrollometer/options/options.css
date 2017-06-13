@@ -1,0 +1,13 @@
+html{
+    background-image: url(../icons/align-right-tile.svg);
+    background-repeat: repeat-y;
+}
+body{
+  font-family: sans-serif;
+}
+h1{
+  padding-left: 16px;
+}
+ul{
+  font-family: monospace;
+}

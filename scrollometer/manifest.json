@@ -6,7 +6,9 @@
   "description": "Measures distance scrolled in real world units.",
   "browser_style": "True",
   "icons": {
-    "48": "icons/ladder.png"
+    "16": "icons/ruler-16.png",
+    "48": "icons/ruler-64.png",
+    "96": "icons/ruler-96.png"
   },
 
   "applications": {
@@ -28,7 +30,7 @@
 
   "browser_action": {
     "browser_style": true,
-    "default_icon": "icons/ladder.png",
+    "default_icon": "icons/ruler-32.png",
     "default_title": "Scollometer",
     "default_popup": "popup/popup.html"
   },
@@ -41,7 +43,8 @@
 ],
 
   "options_ui": {
-    "page": "options/options.html"
+    "page": "options/options.html",
+    "browser_style": true
   }
 
 }
